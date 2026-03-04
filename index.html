@@ -12,12 +12,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preload" href="CV/Profile.png" as="image">
 </head>
 
 <body>
     <nav class="navbar" id="navbar">
         <div class="nav-content">
-            <div class="logo">Somanshu <span>Mohapatra</span></div>
+            <div class="logo">S<span>M</span></div>
             <ul class="nav-links">
                 <li><a href="#intro" class="active">Home</a></li>
                 <li><a href="#skills">Skills</a></li>
@@ -33,6 +34,7 @@
         <section id="intro" class="section intro-section">
             <div class="container intro-container">
                 <div class="intro-text reveal-left">
+                    <br>
                     <span class="greeting">Hello, I am</span>
                     <h1 class="title">Somanshu Mohapatra</h1>
                     <h2 class="subtitle">Robotics & Automation Engineer</h2>
@@ -50,7 +52,8 @@
                     </div>
                 </div>
                 <div class="intro-image reveal-right">
-                    <img src="CV/Profile.png" alt="Somanshu Mohapatra Profile Picture" class="profile-image">
+                    <img src="CV/Profile.png" alt="Somanshu Mohapatra Profile Picture" class="profile-image"
+                        fetchpriority="high" decoding="sync">
                 </div>
             </div>
         </section>
@@ -259,7 +262,8 @@
                 <div class="projects-timeline">
                     <!-- Project 1 -->
                     <div class="project-card reveal-up delay-200">
-                        <img src="CV/Pics/DAMN/DAMN.jpg" alt="Audio Monitoring Project" class="project-image">
+                        <img src="CV/Pics/DAMN/DAMN.jpg" alt="Audio Monitoring Project" class="project-image"
+                            loading="lazy">
                         <div class="project-header">
                             <div class="project-meta">
                                 <span class="project-date">May 2025</span>
@@ -289,7 +293,7 @@
                     <!-- Project 2 -->
                     <div class="project-card reveal-up delay-300">
                         <img src="CV/Pics/Robotic%20Manipulator/Robotic%20Arm.png" alt="Robotic Arm Project"
-                            class="project-image">
+                            class="project-image" loading="lazy">
                         <div class="project-header">
                             <div class="project-meta">
                                 <span class="project-date">Apr 2024</span>
@@ -316,7 +320,7 @@
                     <!-- Project 3 -->
                     <div class="project-card reveal-up delay-400">
                         <img src="CV/Pics/Smart%20Energy%20Meter/Smart%20Energy%20Meter.jpg"
-                            alt="Smart Energy Meter Project" class="project-image">
+                            alt="Smart Energy Meter Project" class="project-image" loading="lazy">
                         <div class="project-header">
                             <div class="project-meta">
                                 <span class="project-date">Jun 2023</span>
@@ -346,7 +350,7 @@
                 <div class="projects-timeline">
                     <!-- Internship 1 -->
                     <div class="project-card reveal-up delay-200">
-                        <img src="CV/Cert/PLC.png" alt="AutomateX Internship" class="project-image">
+                        <img src="CV/Cert/PLC.png" alt="AutomateX Internship" class="project-image" loading="lazy">
                         <div class="project-header">
                             <div class="project-meta">
                                 <span class="project-date">Jul&rsquo; 25 &ndash; Aug&rsquo; 25</span>
@@ -379,20 +383,54 @@
                     </div>
                 </div>
 
+                <!-- Patents Section -->
+                <h2 class="section-title reveal-up" style="margin-top: 4rem;">Patents</h2>
+                <div class="projects-timeline">
+                    <!-- Patent 1 -->
+                    <div class="project-card reveal-up delay-200">
+                        <img src="CV/Patent/MEC%20patent.png" alt="MEC Patent Document" class="project-image"
+                            loading="lazy">
+                        <div class="project-header">
+                            <div class="project-meta">
+                                <span class="project-date">Sep 2025</span>
+                                <div class="project-tags">
+                                    <span class="tag">AI Integration</span>
+                                    <span class="tag">MOS/NDIR Sensors</span>
+                                    <span class="tag">F25D</span>
+                                    <span class="tag">G01N</span>
+                                </div>
+                            </div>
+                            <h3 class="project-title">Patent: Smart Cylindrical Refrigeration System</h3>
+                        </div>
+                        <p class="project-description">
+                            <strong>Application No:</strong> 202511085342 A<br>
+                            Co-invented a revolutionary domestic refrigeration system designed to eliminate food waste
+                            and optimize thermal efficiency. The system replaces static shelving with a motorized
+                            360-degree rotating tray for maximum accessibility. Furthermore, it integrates MOS and NDIR
+                            sensors to detect ripening gases, utilizing an AI-driven backend to provide users with
+                            predictive spoilage alerts. By incorporating an anti-condensation viewing window, the design
+                            significantly minimizes door-opening frequency, drastically reducing the appliance's carbon
+                            footprint and energy consumption.
+                        </p>
+                    </div>
+                </div>
+
                 <!-- Certificates Section -->
                 <h2 class="section-title reveal-up" style="margin-top: 4rem;">Certificates</h2>
                 <div class="cert-scroll-container reveal-up delay-200">
                     <div class="cert-scroll-track">
                         <!-- Original -->
-                        <img src="CV/Cert/DBMS%20Certificate.png" alt="DBMS Certificate" class="cert-image">
+                        <img src="CV/Cert/DBMS%20Certificate.png" alt="DBMS Certificate" class="cert-image"
+                            loading="lazy">
                         <img src="CV/Cert/FusionCraft%20Certificate.png" alt="FusionCraft Certificate"
-                            class="cert-image">
-                        <img src="CV/Cert/PLC.png" alt="PLC Certificate" class="cert-image">
+                            class="cert-image" loading="lazy">
+                        <img src="CV/Cert/PLC.png" alt="PLC Certificate" class="cert-image" loading="lazy">
                         <!-- Duplicated for seamless scrolling -->
-                        <img src="CV/Cert/DBMS%20Certificate.png" alt="DBMS Certificate" class="cert-image">
+                        <img src="CV/Cert/DBMS%20Certificate.png" alt="DBMS Certificate" class="cert-image"
+                            loading="lazy">
                         <img src="CV/Cert/FusionCraft%20Certificate.png" alt="FusionCraft Certificate"
-                            class="cert-image">
-                        <img src="CV/Cert/PLC.png" alt="PLC Certificate" class="cert-image">
+                            class="cert-image" loading="lazy">
+                        <img src="CV/Cert/PLC.png" alt="PLC Certificate" class="cert-image" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -429,6 +467,25 @@
                             creating a bash automation script reinforced the principle that sophisticated technology is
                             most effective when it is highly accessible and deployed seamlessly for end-users.</p>
                     </div>
+                    <div class="reflection-card reveal-up delay-400">
+                        <h3>Industrial Reliability and Safety First</h3>
+                        <p>My internship at <strong>AutomateX</strong> transitioning theoretical programming into
+                            practical ladder logic taught me the absolute necessity of fault-tolerance. Designing the
+                            Automated Chicken Feeder System emphasized that in industrial scenarios, a single failure
+                            point is unacceptable. Implementing 100% reliable emergency stop latency and auto-recovery
+                            resets fundamentally shifted my engineering mindset from just making systems "work" to
+                            ensuring they "never fail unsafely".</p>
+                    </div>
+                    <div class="reflection-card reveal-up delay-500">
+                        <h3>Pioneering Sustainable Domestic Tech</h3>
+                        <p>Through the <strong>Smart Cylindrical Refrigeration System</strong> patent process, I
+                            discovered the immense potential of marrying mechanical hardware (360-degree motorized
+                            trays) with intelligent software (AI and NDIR sensors). It revealed that tackling global
+                            issues like food waste and energy inefficiency requires looking past traditional
+                            constraints. Optimizing thermal retention by simply minimizing the need to open a door
+                            taught me that the best engineering solutions often redefine how users physically interact
+                            with a problem.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -437,7 +494,7 @@
     <footer class="footer">
         <div class="container footer-content">
             <div class="footer-logo">Somanshu <span>Mohapatra</span></div>
-            <p>&copy; 2026 Robotics & Automation Engineer Portfolio. All rights reserved.</p>
+            <p>&copy; 2026 SM. All rights reserved.</p>
             <div class="social-links">
                 <a href="https://www.linkedin.com/in/somanshu-mohapatra-124589288/"><i
                         class="fa-brands fa-linkedin"></i></a>
@@ -446,6 +503,12 @@
             </div>
         </div>
     </footer>
+
+    <!-- Image Modal -->
+    <div id="imageModal" class="modal">
+        <span class="modal-close">&times;</span>
+        <img class="modal-content" id="modalImage">
+    </div>
 
     <script src="script.js"></script>
 </body>

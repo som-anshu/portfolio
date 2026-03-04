@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Navbar scroll effect
     const navbar = document.getElementById('navbar');
-    
+
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
             navbar.classList.add('scrolled');
@@ -13,10 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // Active link highlighting on scroll
     const sections = document.querySelectorAll('.section');
     const navLinks = document.querySelectorAll('.nav-links a');
+    const navLinksContainer = document.querySelector('.nav-links');
+    const mobileMenu = document.getElementById('mobile-menu');
+
+    // Mobile menu toggle
+    if (mobileMenu) {
+        mobileMenu.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+        });
+    }
 
     window.addEventListener('scroll', () => {
         let current = '';
-        
+
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
@@ -27,20 +37,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
         navLinks.forEach(link => {
             link.classList.remove('active');
+            link.classList.remove('active-link');
             if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active');
+                link.classList.add('active-link');
+            }
+        });
+    });
+
+    // Close mobile menu when a link is clicked
+    navLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinksContainer.classList.contains('active')) {
+                navLinksContainer.classList.remove('active');
+                mobileMenu.classList.remove('active');
             }
         });
     });
 
     // Skill bars animation on scroll
     const skillBars = document.querySelectorAll('.progress-fill');
-    
+
     const animateSkills = () => {
         skillBars.forEach(bar => {
             const barPosition = bar.getBoundingClientRect().top;
             const screenPosition = window.innerHeight / 1.2;
-            
+
             if (barPosition < screenPosition) {
                 const width = bar.getAttribute('data-width');
                 bar.style.width = width;
@@ -54,13 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Scroll Reveal Animations using Intersection Observer
     const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right');
-    
+
     const revealOptions = {
         threshold: 0.15,
         rootMargin: "0px 0px -50px 0px"
     };
 
-    const revealOnScroll = new IntersectionObserver(function(entries, observer) {
+    const revealOnScroll = new IntersectionObserver(function (entries, observer) {
         entries.forEach(entry => {
             if (!entry.isIntersecting) {
                 return;
@@ -73,5 +94,49 @@ document.addEventListener('DOMContentLoaded', () => {
 
     revealElements.forEach(el => {
         revealOnScroll.observe(el);
+    });
+
+    // Image Modal Lightbox functionality
+    const modal = document.getElementById("imageModal");
+    const modalImg = document.getElementById("modalImage");
+    const closeBtn = document.querySelector(".modal-close");
+
+    // Select all images we want to make clickable
+    const images = document.querySelectorAll(".profile-image, .project-image, .cert-image");
+
+    images.forEach(img => {
+        img.addEventListener('click', function () {
+            modal.style.display = "block";
+            // Allow display block to apply before adding opacity class for animation
+            setTimeout(() => {
+                modal.classList.add("show");
+            }, 10);
+            modalImg.src = this.src;
+        });
+    });
+
+    // Close modal functions
+    const closeModal = () => {
+        modal.classList.remove("show");
+        // Wait for animation to finish before hiding element
+        setTimeout(() => {
+            modal.style.display = "none";
+        }, 300);
+    }
+
+    closeBtn.addEventListener('click', closeModal);
+
+    // Close when clicking outside the image
+    window.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            closeModal();
+        }
+    });
+
+    // Close on escape key
+    document.addEventListener('keydown', (event) => {
+        if (event.key === "Escape" && modal.style.display === "block") {
+            closeModal();
+        }
     });
 });

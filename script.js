@@ -298,12 +298,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // Smooth Animation for Jump to Next Section on Single Scroll
     const scrollableSections = Array.from(document.querySelectorAll('.section:not(.work-section):not(#skills), .skills-division, .work-category, .footer'));
     let isScrolling = false;
+    let lastWheelTime = Date.now();
+    let scrollStartTime = 0;
 
     window.addEventListener('wheel', (e) => {
         // Don't interfere if modal is open
         if (modal.classList.contains("show")) return;
 
         e.preventDefault();
+        lastWheelTime = Date.now();
 
         if (isScrolling) return;
 
@@ -333,12 +336,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (nextIdx !== currentIdx) {
             isScrolling = true;
+            scrollStartTime = Date.now();
             scrollableSections[nextIdx].scrollIntoView({ behavior: 'smooth' });
 
-            // Adjust this timeout to match the scrolling animation duration
-            setTimeout(() => {
-                isScrolling = false;
-            }, 800);
+            // Wait for both the animation to complete and the trackpad inertia to stop
+            const checkScrollEnd = setInterval(() => {
+                const timeSinceLastWheel = Date.now() - lastWheelTime;
+                const timeSinceScrollStart = Date.now() - scrollStartTime;
+
+                if (timeSinceScrollStart > 800 && timeSinceLastWheel > 150) {
+                    clearInterval(checkScrollEnd);
+                    isScrolling = false;
+                }
+            }, 50);
         }
     }, { passive: false });
 });

@@ -82,13 +82,15 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         // Win 10 Reveal Glow for Nav Links
-        link.addEventListener('mousemove', e => {
-            const rect = link.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
-            link.style.setProperty('--mouse-x', `${x}px`);
-            link.style.setProperty('--mouse-y', `${y}px`);
-        });
+        if (window.matchMedia("(pointer: fine)").matches) {
+            link.addEventListener('mousemove', e => {
+                const rect = link.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                link.style.setProperty('--mouse-x', `${x}px`);
+                link.style.setProperty('--mouse-y', `${y}px`);
+            });
+        }
     });
 
     // Skill bars animation on scroll
@@ -239,29 +241,31 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Windows 10 Sophisticated Animations (Glow & Tilt)
-    projectCards.forEach(card => {
-        card.addEventListener('mousemove', e => {
-            const rect = card.getBoundingClientRect();
-            const x = e.clientX - rect.left;
-            const y = e.clientY - rect.top;
+    if (window.matchMedia("(pointer: fine)").matches) {
+        projectCards.forEach(card => {
+            card.addEventListener('mousemove', e => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
 
-            // Update Glow
-            card.style.setProperty('--mouse-x', `${x}px`);
-            card.style.setProperty('--mouse-y', `${y}px`);
+                // Update Glow
+                card.style.setProperty('--mouse-x', `${x}px`);
+                card.style.setProperty('--mouse-y', `${y}px`);
 
-            // Update Tilt (Subtle)
-            const centerX = rect.width / 2;
-            const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
-            const rotateY = ((x - centerX) / centerX) * 5;
+                // Update Tilt (Subtle)
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
+                const rotateY = ((x - centerX) / centerX) * 5;
 
-            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+                card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+            });
+
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+            });
         });
-
-        card.addEventListener('mouseleave', () => {
-            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
-        });
-    });
+    }
     // Slider Controller Logic
     function initSlider(sliderId) {
         const viewport = document.getElementById(sliderId);

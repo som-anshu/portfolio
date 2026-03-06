@@ -62,26 +62,6 @@ html {
     /* Accounts for fixed navbar */
 }
 
-/* Custom Scrollbar for Win 10 look */
-::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
-}
-
-::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-::-webkit-scrollbar-thumb {
-    background: #a6a6a6;
-    border: 2px solid transparent;
-    background-clip: padding-box;
-}
-
-::-webkit-scrollbar-thumb:hover {
-    background: #7a7a7a;
-    border: 1px solid transparent;
-}
 
 body {
     font-family: var(--font-stack);
@@ -275,6 +255,12 @@ a {
     );
     animation: rotate-glow 4s linear infinite;
     pointer-events: none;
+}
+
+@media (max-width: 900px) {
+    .btn-accent::before {
+        animation: none;
+    }
 }
 
 @keyframes rotate-glow {
@@ -1096,6 +1082,12 @@ body.dark-theme::after {
     pointer-events: none;
     z-index: 9999;
 }
+
+@media (max-width: 900px) {
+    body.dark-theme::after {
+        display: none;
+    }
+}
 body.dark-theme .project-card {
     background: rgba(30, 30, 30, 0.7);
     border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1222,6 +1214,13 @@ body.dark-theme .modal-close {
 
     .project-card {
         padding: 1.5rem;
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    .navbar, .bg-light, .skill-category, .reflection-card {
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
     }
 }
 

@@ -107,8 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', animateSkills);
-    // Trigger once on load in case skills are visible immediately
-    setTimeout(animateSkills, 50);
+    // Trigger immediately on load as skills might be visible
+    animateSkills();
 
     // Scroll Reveal Animations using Intersection Observer
     const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right');
@@ -449,4 +449,19 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         type();
     }
+
 });
+
+// Preloader Removal (Top Level for Reliability)
+const removePreloader = () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.classList.add('fade-out');
+        document.body.classList.remove('loading');
+    }
+};
+
+window.addEventListener('load', removePreloader);
+
+// Failsafe: Remove preloader after 5 seconds even if load event fails
+setTimeout(removePreloader, 5000);

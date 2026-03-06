@@ -64,27 +64,41 @@ html {
 }
 
 
-/* Ensure scrollbar visibility on WebKit browsers (Chrome, Safari, etc.) */
-::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+
+/* Ensure scrollbar visibility on Desktop WebKit browsers */
+@media (min-width: 901px) {
+    ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background: rgba(0, 0, 0, 0.2);
+        border-radius: 3px;
+    }
+
+    body.dark-theme ::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+    }
+
+    body.dark-theme ::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+    }
 }
 
-::-webkit-scrollbar-track {
-    background: rgba(0, 0, 0, 0.05);
-}
-
-::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
-    border-radius: 3px;
-}
-
-body.dark-theme ::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-}
-
-body.dark-theme ::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.2);
+/* Hide scrollbar on Mobile/Android */
+@media (max-width: 900px) {
+    ::-webkit-scrollbar {
+        display: none;
+    }
+    html, body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
+    }
 }
 
 body {
@@ -94,6 +108,17 @@ body {
     line-height: 1.6;
     overflow-x: hidden;
     position: relative;
+}
+
+#bg-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2;
+    pointer-events: none;
+    background: transparent;
 }
 
 /* Coder Vibe: Grid Background Pattern */
@@ -1174,6 +1199,10 @@ body.dark-theme .modal-close {
         display: block;
         position: relative;
         z-index: 1002;
+    }
+
+    #bg-canvas {
+        display: none; /* Disable resource-intensive background on mobile */
     }
 
     .nav-links {

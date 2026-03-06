@@ -484,3 +484,107 @@ window.addEventListener('load', removePreloader);
 
 // Failsafe: Remove preloader after 5 seconds even if load event fails
 setTimeout(removePreloader, 5000);
+
+// --- BACKGROUND PARTICLE ANIMATION ---
+function initBackgroundAnimation() {
+    const canvas = document.getElementById('bg-canvas');
+    if (!canvas || window.matchMedia("(max-width: 900px)").matches) return;
+
+    const ctx = canvas.getContext('2d');
+    let particles = [];
+    let animationId;
+    let mouse = { x: null, y: null, radius: 150 };
+
+    function resize() {
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+    }
+
+    window.addEventListener('resize', resize);
+    window.addEventListener('mousemove', (e) => {
+        mouse.x = e.x;
+        mouse.y = e.y;
+    });
+
+    class Particle {
+        constructor() {
+            this.x = Math.random() * canvas.width;
+            this.y = Math.random() * canvas.height;
+            this.size = Math.random() * 1.5 + 0.5;
+            this.speedX = (Math.random() - 0.5) * 0.5;
+            this.speedY = (Math.random() - 0.5) * 0.5;
+        }
+
+        update() {
+            this.x += this.speedX;
+            this.y += this.speedY;
+
+            if (this.x > canvas.width) this.x = 0;
+            else if (this.x < 0) this.x = canvas.width;
+            if (this.y > canvas.height) this.y = 0;
+            else if (this.y < 0) this.y = canvas.height;
+
+            if (mouse.x != null) {
+                let dx = mouse.x - this.x;
+                let dy = mouse.y - this.y;
+                let distance = Math.sqrt(dx * dx + dy * dy);
+                if (distance < mouse.radius) {
+                    const force = (mouse.radius - distance) / mouse.radius;
+                    this.x -= dx * force * 0.02;
+                    this.y -= dy * force * 0.02;
+                }
+            }
+        }
+
+        draw() {
+            ctx.fillStyle = document.body.classList.contains('dark-theme') 
+                ? 'rgba(0, 120, 215, 0.3)' 
+                : 'rgba(0, 120, 215, 0.15)';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+        }
+    }
+
+    function init() {
+        particles = [];
+        const numberOfParticles = (canvas.width * canvas.height) / 15000;
+        for (let i = 0; i < numberOfParticles; i++) {
+            particles.push(new Particle());
+        }
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        
+        for (let i = 0; i < particles.length; i++) {
+            particles[i].update();
+            particles[i].draw();
+
+            for (let j = i; j < particles.length; j++) {
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                if (distance < 100) {
+                    const opacity = 1 - (distance / 100);
+                    ctx.strokeStyle = document.body.classList.contains('dark-theme')
+                        ? `rgba(0, 120, 215, ${opacity * 0.1})`
+                        : `rgba(0, 120, 215, ${opacity * 0.05})`;
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        animationId = requestAnimationFrame(animate);
+    }
+
+    resize();
+    init();
+    animate();
+}
+
+window.addEventListener('load', initBackgroundAnimation);

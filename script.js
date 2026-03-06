@@ -1,6 +1,35 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Navbar scroll effect
+    // Theme Initialization (Immediate)
+    const applyTheme = (theme) => {
+        if (theme === 'dark') {
+            document.body.classList.add('dark-theme');
+        } else {
+            document.body.classList.remove('dark-theme');
+        }
+    };
+
+    const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+    applyTheme(savedTheme);
+
+    // Sync theme across tabs/windows
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'portfolio-theme') {
+            applyTheme(event.newValue);
+        }
+    });
+
+    // Navbar elements
     const navbar = document.getElementById('navbar');
+    const themeToggle = document.getElementById('theme-toggle');
+
+    // Theme Toggle Click Handler
+    if (themeToggle) {
+        themeToggle.addEventListener('click', () => {
+            document.body.classList.toggle('dark-theme');
+            const isDark = document.body.classList.contains('dark-theme');
+            localStorage.setItem('portfolio-theme', isDark ? 'dark' : 'light');
+        });
+    }
 
     window.addEventListener('scroll', () => {
         if (window.scrollY > 50) {
@@ -30,16 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.clientHeight;
-            if (scrollY >= (sectionTop - 200)) {
+            if (window.scrollY >= (sectionTop - 250)) { // Slightly larger offset for better transition
                 current = section.getAttribute('id');
             }
         });
 
         navLinks.forEach(link => {
             link.classList.remove('active');
-            link.classList.remove('active-link');
-            if (link.getAttribute('href').includes(current)) {
-                link.classList.add('active-link');
+            if (link.getAttribute('href').includes(current) && current !== '') {
+                link.classList.add('active');
             }
         });
     });
@@ -51,6 +79,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 navLinksContainer.classList.remove('active');
                 mobileMenu.classList.remove('active');
             }
+        });
+
+        // Win 10 Reveal Glow for Nav Links
+        link.addEventListener('mousemove', e => {
+            const rect = link.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            link.style.setProperty('--mouse-x', `${x}px`);
+            link.style.setProperty('--mouse-y', `${y}px`);
         });
     });
 
@@ -200,6 +237,31 @@ document.addEventListener('DOMContentLoaded', () => {
             closeModal();
         }
     });
+
+    // Windows 10 Sophisticated Animations (Glow & Tilt)
+    projectCards.forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+
+            // Update Glow
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+
+            // Update Tilt (Subtle)
+            const centerX = rect.width / 2;
+            const centerY = rect.height / 2;
+            const rotateX = ((y - centerY) / centerY) * -5; // Max 5 degrees
+            const rotateY = ((x - centerX) / centerX) * 5;
+
+            card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)`;
+        });
+    });
     // Slider Controller Logic
     function initSlider(sliderId) {
         const viewport = document.getElementById(sliderId);
@@ -217,9 +279,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function updateSlider() {
             track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-            // Update button states
-            if (prevBtn) prevBtn.disabled = currentIndex === 0;
-            if (nextBtn) nextBtn.disabled = currentIndex === totalCards - 1;
+            // Note: Removed disabling of buttons to allow infinite looping as requested
         }
 
         function nextSlide() {
@@ -280,10 +340,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const diff = startX - endX;
 
             if (Math.abs(diff) > 50) {
-                if (diff > 0 && currentIndex < totalCards - 1) {
-                    currentIndex++;
-                } else if (diff < 0 && currentIndex > 0) {
-                    currentIndex--;
+                if (diff > 0) {
+                    // Swipe left -> Next
+                    currentIndex = (currentIndex < totalCards - 1) ? currentIndex + 1 : 0;
+                } else if (diff < 0) {
+                    // Swipe right -> Prev
+                    currentIndex = (currentIndex > 0) ? currentIndex - 1 : totalCards - 1;
                 }
                 updateSlider();
             }
@@ -303,20 +365,20 @@ document.addEventListener('DOMContentLoaded', () => {
         // Don't interfere if modal is open
         if (modal.classList.contains("show")) return;
 
-        e.preventDefault();
-
-        if (isScrolling) return;
-
-        // Only trigger on significant scroll intent to avoid tiny trackpad movements triggering events
+        // Threshold for scroll intent
         if (Math.abs(e.deltaY) < 30) return;
+
+        if (isScrolling) {
+            e.preventDefault();
+            return;
+        }
 
         let currentIdx = -1;
         let minDistance = Infinity;
 
-        // Find the section currently in view
+        // Find the section currently in view (closest to top)
         scrollableSections.forEach((sec, idx) => {
             const rect = sec.getBoundingClientRect();
-            // Consider the section active if its top is closest to the navbar (80px)
             const distance = Math.abs(rect.top - 80);
             if (distance < minDistance) {
                 minDistance = distance;
@@ -324,24 +386,67 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        let nextIdx = currentIdx;
+        const currentSection = scrollableSections[currentIdx];
+        const rect = currentSection.getBoundingClientRect();
+        const viewportHeight = window.innerHeight;
+        const navbarHeight = 80;
 
+        // Logic for jumping vs. normal scrolling
         if (e.deltaY > 0) {
-            // Scroll down
-            nextIdx = Math.min(currentIdx + 1, scrollableSections.length - 1);
-        } else if (e.deltaY < 0) {
-            // Scroll up
-            nextIdx = Math.max(currentIdx - 1, 0);
-        }
+            // SCROLLING DOWN
+            // If the current section bottom is significantly below the viewport bottom,
+            // allow native scroll to see the rest of the content.
+            if (rect.bottom > viewportHeight + 5) {
+                return; // Normal scrolling
+            }
+            
+            // Otherwise, if we are at the end of the section, jump to next
+            const nextIdx = Math.min(currentIdx + 1, scrollableSections.length - 1);
+            if (nextIdx !== currentIdx) {
+                e.preventDefault();
+                isScrolling = true;
+                scrollableSections[nextIdx].scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => { isScrolling = false; }, 800);
+            }
+        } else {
+            // SCROLLING UP
+            // If the current section top is significantly above the navbar,
+            // allow native scroll to see the top content.
+            if (rect.top < navbarHeight - 5) {
+                return; // Normal scrolling
+            }
 
-        if (nextIdx !== currentIdx) {
-            isScrolling = true;
-            scrollableSections[nextIdx].scrollIntoView({ behavior: 'smooth' });
-
-            // Block further scrolling until animation completes and trackpad inertia stops
-            setTimeout(() => {
-                isScrolling = false;
-            }, 800);
+            // Otherwise, jump to previous
+            const prevIdx = Math.max(currentIdx - 1, 0);
+            if (prevIdx !== currentIdx) {
+                e.preventDefault();
+                isScrolling = true;
+                scrollableSections[prevIdx].scrollIntoView({ behavior: 'smooth' });
+                setTimeout(() => { isScrolling = false; }, 800);
+            }
         }
     }, { passive: false });
+
+    // Coder Vibe: Typewriter Effect
+    const subtitle = document.querySelector('.subtitle');
+    if (subtitle) {
+        const text = subtitle.innerText;
+        subtitle.innerText = '';
+        subtitle.style.fontFamily = 'var(--font-mono)';
+        subtitle.style.display = 'inline-block';
+        subtitle.style.borderRight = '3px solid var(--primary-color)';
+        
+        let i = 0;
+        const type = () => {
+            if (i < text.length) {
+                subtitle.innerText += text.charAt(i);
+                i++;
+                setTimeout(type, 100);
+            } else {
+                // Keep flickering effect for cursor
+                subtitle.classList.add('blinking-cursor');
+            }
+        };
+        type();
+    }
 });

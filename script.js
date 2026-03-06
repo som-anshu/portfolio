@@ -48,8 +48,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Mobile menu toggle
     if (mobileMenu) {
         mobileMenu.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
+            const isActive = navLinksContainer.classList.toggle('active');
             mobileMenu.classList.toggle('active');
+            
+            // Toggle icon
+            const icon = mobileMenu.querySelector('i');
+            if (isActive) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-xmark');
+            } else {
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
+            }
         });
     }
 
@@ -78,6 +88,11 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navLinksContainer.classList.contains('active')) {
                 navLinksContainer.classList.remove('active');
                 mobileMenu.classList.remove('active');
+                
+                // Reset icon
+                const icon = mobileMenu.querySelector('i');
+                icon.classList.remove('fa-xmark');
+                icon.classList.add('fa-bars');
             }
         });
 

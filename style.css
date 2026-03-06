@@ -1,28 +1,29 @@
 /* Globals & Variables */
 :root {
-    --primary-color: #1e3a8a;
-    --primary-light: #e0f2fe;
-    --secondary-color: #0369a1;
-    --accent-color: #0f766e;
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --bg-main: #f8fafc;
-    --bg-light: rgba(241, 245, 249, 0.7);
-    --border-color: #cbd5e1;
-    --glass-bg: rgba(255, 255, 255, 0.82);
-    --transition-speed: 0.3s;
-    --font-stack: 'Montserrat', sans-serif;
-    --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-    --gradient-start: #2563eb;
-    --gradient-end: #4f46e5;
-    --glow-primary: rgba(37, 99, 235, 0.4);
+    --primary-color: #3b82f6;      /* Modern Blue */
+    --primary-rgb: 59, 130, 246;
+    --primary-light: rgba(59, 130, 246, 0.1);
+    --secondary-color: #0ea5e9;    /* Ocean Blue */
+    --accent-color: #14b8a6;       /* Soft Teal */
+    --text-main: #1e293b;          /* Crisp Slate */
+    --text-muted: #64748b;         /* Soft Gray */
+    --bg-main: #f8fafc;            /* Clean Off-White */
+    --bg-light: rgba(255, 255, 255, 0.85); /* Frosty Glass */
+    --border-color: #e2e8f0;       /* Subtle Border */
+    --glass-bg: rgba(255, 255, 255, 0.7);  /* Modern Glassmorphism */
+    --transition-speed: 0.2s;      /* Snappier transitions */
+    --font-stack: 'Inter', 'Montserrat', sans-serif;
+    --shadow-sm: 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+    --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.08);
+    --gradient-start: #60a5fa;
+    --gradient-end: #3b82f6;
+    --glow-primary: rgba(59, 130, 246, 0.2);
 }
 
 /* Utilities */
 .text-gradient {
-    background: linear-gradient(135deg, var(--gradient-start), var(--gradient-end));
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -49,8 +50,8 @@ body {
     font-family: var(--font-stack);
     color: var(--text-main);
     background-color: var(--bg-main);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300' fill='none' stroke='%23cbd5e1' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' opacity='0.5'%3E%3C!-- Gear --%3E%3Ccircle cx='50' cy='50' r='12'/%3E%3Ccircle cx='50' cy='50' r='4'/%3E%3Cpath d='M50 34v4M50 62v4M34 50h4M62 50h4M38.7 38.7l2.8 2.8M58.5 58.5l2.8 2.8M38.7 61.3l2.8-2.8M58.5 41.5l-2.8 2.8'/%3E%3C!-- Microcontroller --%3E%3Crect x='150' y='40' width='40' height='60' rx='2'/%3E%3Ccircle cx='160' cy='50' r='2'/%3E%3Ccircle cx='180' cy='50' r='2'/%3E%3Ccircle cx='160' cy='90' r='2'/%3E%3Ccircle cx='180' cy='90' r='2'/%3E%3Crect x='160' y='60' width='20' height='20'/%3E%3Cpath d='M146 50h4M146 60h4M146 70h4M146 80h4M190 50h4M190 60h4M190 70h4M190 80h4'/%3E%3C!-- Robotic Arm --%3E%3Cpath d='M250 250v-20l-20-20v-20l20-20'/%3E%3Ccircle cx='250' cy='230' r='4'/%3E%3Ccircle cx='230' cy='210' r='4'/%3E%3Ccircle cx='230' cy='190' r='4'/%3E%3C!-- Gripper --%3E%3Cpath d='M250 170v-10M245 155v5h10v-5'/%3E%3C!-- Breadboard / PCB Traces --%3E%3Cpath d='M40 200h30v20h20'/%3E%3Ccircle cx='94' cy='220' r='4'/%3E%3Cpath d='M40 220h20v20h30'/%3E%3Ccircle cx='94' cy='240' r='4'/%3E%3Cpath d='M30 200h-4M30 220h-4'/%3E%3C!-- Resistor --%3E%3Cpath d='M150 200h10l3-5l6 10l6-10l6 10l3-5h10'/%3E%3C!-- Cap --%3E%3Cpath d='M200 240v-10M200 250v10M190 230h20M190 250h20'/%3E%3C!-- Transistor --%3E%3Ccircle cx='100' cy='100' r='15'/%3E%3Cpath d='M90 100h20M95 100v10M105 100l5-10M95 100l-5-10'/%3E%3C!-- Ultrasonic Sensor --%3E%3Crect x='220' y='80' width='50' height='25' rx='2'/%3E%3Ccircle cx='235' cy='92.5' r='8'/%3E%3Ccircle cx='255' cy='92.5' r='8'/%3E%3Cpath d='M235 105v5M241 105v5M248 105v5M255 105v5'/%3E%3C/svg%3E");
-    background-size: 300px 300px;
+    background-image: radial-gradient(rgba(148, 163, 184, 0.2) 1px, transparent 1px);
+    background-size: 24px 24px;
     background-repeat: repeat;
     background-attachment: fixed;
     line-height: 1.6;
@@ -193,6 +194,18 @@ a {
     transform: scaleY(1);
 }
 
+.btn-accent {
+    background: var(--accent-color);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(20, 184, 166, 0.2);
+}
+
+.btn-accent:hover {
+    transform: translateY(-2px);
+    background: #0d9488;
+    box-shadow: 0 6px 20px rgba(13, 148, 136, 0.3);
+}
+
 /* Navigation */
 .navbar {
     position: fixed;
@@ -321,15 +334,20 @@ a {
 }
 
 .profile-image {
-    width: 280px;
-    height: 280px;
-    border-radius: 50%;
-    object-fit: contain;
+    width: clamp(280px, 40vw, 480px); /* Larger but responsive */
+    height: clamp(280px, 40vw, 480px);
+    object-fit: contain; /* Prevents cropping */
     animation: float 6s ease-in-out infinite;
-    background-color: transparent;
-    mix-blend-mode: multiply;
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.15));
+    background-color: transparent; /* Fixed blank space by making bg transparent */
+    border: none; /* Removed border to prevent visible gaps */
+    filter: drop-shadow(0 15px 35px rgba(0, 0, 0, 0.15));
     cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.02);
+    border-color: var(--primary-color);
 }
 
 @keyframes float {
@@ -362,7 +380,7 @@ a {
 .soft-skills {
     position: relative;
     padding: 3rem;
-    background: rgba(var(--primary-rgb), 0.05);
+    background: rgba(59, 130, 246, 0.03); /* Lighter tint for light mode */
     border-radius: 20px;
     border: 1px solid var(--border-color);
 }
@@ -405,8 +423,8 @@ a {
 
 .skill-category:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md), 0 0 15px var(--glow-primary);
-    border-color: var(--primary-light);
+    box-shadow: var(--shadow-md), 0 5px 15px rgba(59, 130, 246, 0.15);
+    border-color: rgba(59, 130, 246, 0.3);
 }
 
 .category-title {
@@ -591,12 +609,12 @@ a {
 
 .project-card {
     background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-radius: 12px;
     padding: 2.5rem;
-    box-shadow: var(--shadow-md);
-    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(255, 255, 255, 0.9);
     position: relative;
     overflow: hidden;
     transition: transform var(--transition-speed);
@@ -621,8 +639,8 @@ a {
 
 .project-card:hover {
     transform: translateY(-5px);
-    box-shadow: var(--shadow-md), 0 0 20px rgba(37, 99, 235, 0.3);
-    border-color: rgba(37, 99, 235, 0.4);
+    box-shadow: var(--shadow-md), 0 8px 20px rgba(59, 130, 246, 0.12);
+    border-color: rgba(59, 130, 246, 0.2);
 }
 
 .project-card::before {
@@ -643,9 +661,8 @@ a {
     object-fit: contain;
     border-radius: 8px;
     margin-bottom: 2rem;
-    background-color: rgba(255, 255, 255, 0.2);
-    /* Subtle placeholder bg */
-    mix-blend-mode: normal;
+    background-color: rgba(0, 0, 0, 0.02);
+    mix-blend-mode: multiply;
     filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.05));
 }
 
@@ -722,9 +739,9 @@ a {
     font-weight: 600;
     padding: 0.25rem 0.75rem;
     border-radius: 20px;
-    background: #f1f5f9;
-    color: var(--text-muted);
-    border: 1px solid #cbd5e1;
+    background: rgba(59, 130, 246, 0.08); /* Soft primary background */
+    color: var(--primary-color);
+    border: 1px solid var(--border-color);
 }
 
 .project-description {
@@ -812,11 +829,11 @@ a {
     }
 }
 
-/* Reflection Section */
+/* Key Insights Section */
 .reflection-content {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
 }
 
 .reflection-card {
@@ -1090,7 +1107,7 @@ a {
 .reveal-left,
 .reveal-right {
     opacity: 0;
-    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+    transition: all 0.5s cubic-bezier(0.3, 0, 0, 1); /* Faster reveal */
 }
 
 .reveal-up {
@@ -1114,25 +1131,11 @@ a {
 }
 
 /* Add delays for staggered grid items */
-.delay-100 {
-    transition-delay: 100ms;
-}
-
-.delay-200 {
-    transition-delay: 200ms;
-}
-
-.delay-300 {
-    transition-delay: 300ms;
-}
-
-.delay-400 {
-    transition-delay: 400ms;
-}
-
-.delay-500 {
-    transition-delay: 500ms;
-}
+.delay-100 { transition-delay: 80ms; }
+.delay-200 { transition-delay: 160ms; }
+.delay-300 { transition-delay: 240ms; }
+.delay-400 { transition-delay: 320ms; }
+.delay-500 { transition-delay: 400ms; }
 
 /* Dynamic Content Modal */
 .modal {

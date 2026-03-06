@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const animateSkills = () => {
         skillBars.forEach(bar => {
             const barPosition = bar.getBoundingClientRect().top;
-            const screenPosition = window.innerHeight - 10;
+            const screenPosition = window.innerHeight + 50; // Increased threshold to ensure the last item triggers
 
             if (barPosition < screenPosition) {
                 const width = bar.getAttribute('data-width');
@@ -71,14 +71,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', animateSkills);
     // Trigger once on load in case skills are visible immediately
-    setTimeout(animateSkills, 100);
+    setTimeout(animateSkills, 50);
 
     // Scroll Reveal Animations using Intersection Observer
     const revealElements = document.querySelectorAll('.reveal, .reveal-up, .reveal-left, .reveal-right');
 
     const revealOptions = {
-        threshold: 0.15,
-        rootMargin: "0px 0px -50px 0px"
+        threshold: 0.1,
+        rootMargin: "0px 0px -20px 0px"
     };
 
     const revealOnScroll = new IntersectionObserver(function (entries, observer) {
@@ -341,7 +341,7 @@ document.addEventListener('DOMContentLoaded', () => {
             // Block further scrolling until animation completes and trackpad inertia stops
             setTimeout(() => {
                 isScrolling = false;
-            }, 1100);
+            }, 800);
         }
     }, { passive: false });
 });

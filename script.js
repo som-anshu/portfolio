@@ -107,6 +107,57 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+    // Custom Trailing Cursor
+    const cursor = document.querySelector('.custom-cursor');
+    let mouseX = 0, mouseY = 0;
+    let cursorX = 0, cursorY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    const animateCursor = () => {
+        let distX = mouseX - cursorX;
+        let distY = mouseY - cursorY;
+        
+        cursorX = cursorX + (distX * 0.15);
+        cursorY = cursorY + (distY * 0.15);
+
+        cursor.style.left = `${cursorX - 10}px`;
+        cursor.style.top = `${cursorY - 10}px`;
+
+        requestAnimationFrame(animateCursor);
+    };
+    animateCursor();
+
+    // Interaction feedback for cursor
+    const interactiveElements = document.querySelectorAll('a, button, .project-card, .skill-card, .profile-image');
+    interactiveElements.forEach(el => {
+        el.addEventListener('mouseenter', () => {
+            cursor.style.transform = 'scale(3)';
+            cursor.style.backgroundColor = 'var(--accent-color)';
+        });
+        el.addEventListener('mouseleave', () => {
+            cursor.style.transform = 'scale(1)';
+            cursor.style.backgroundColor = 'var(--primary-color)';
+        });
+    });
+
+    // Project Image Parallax
+    window.addEventListener('scroll', () => {
+        const images = document.querySelectorAll('.project-image');
+        images.forEach(img => {
+            const rect = img.parentElement.getBoundingClientRect();
+            const viewHeight = window.innerHeight;
+            
+            if (rect.top < viewHeight && rect.bottom > 0) {
+                const percentage = (viewHeight - rect.top) / (viewHeight + rect.height);
+                const move = (percentage - 0.5) * 40; // Adjust shift amount
+                img.style.transform = `translateY(${move}px) scale(1.1)`;
+            }
+        });
+    });
 
     // Skill bars animation on scroll
     const skillBars = document.querySelectorAll('.progress-fill');
@@ -506,79 +557,58 @@ function initBackgroundAnimation() {
         mouse.y = e.y;
     });
 
-    class Particle {
+    class Orb {
         constructor() {
             this.x = Math.random() * canvas.width;
             this.y = Math.random() * canvas.height;
-            this.size = Math.random() * 1.5 + 0.5;
-            this.speedX = (Math.random() - 0.5) * 0.5;
-            this.speedY = (Math.random() - 0.5) * 0.5;
+            this.radius = Math.random() * 400 + 200;
+            this.speedX = (Math.random() - 0.5) * 0.2;
+            this.speedY = (Math.random() - 0.5) * 0.2;
+            
+            // Randomly pick between Purple and Teal
+            const colors = document.body.classList.contains('dark-theme')
+                ? ['rgba(168, 85, 247, 0.06)', 'rgba(45, 212, 191, 0.06)']
+                : ['rgba(168, 85, 247, 0.04)', 'rgba(45, 212, 191, 0.04)'];
+            this.color = colors[Math.floor(Math.random() * colors.length)];
         }
 
         update() {
             this.x += this.speedX;
             this.y += this.speedY;
 
-            if (this.x > canvas.width) this.x = 0;
-            else if (this.x < 0) this.x = canvas.width;
-            if (this.y > canvas.height) this.y = 0;
-            else if (this.y < 0) this.y = canvas.height;
-
-            if (mouse.x != null) {
-                let dx = mouse.x - this.x;
-                let dy = mouse.y - this.y;
-                let distance = Math.sqrt(dx * dx + dy * dy);
-                if (distance < mouse.radius) {
-                    const force = (mouse.radius - distance) / mouse.radius;
-                    this.x -= dx * force * 0.02;
-                    this.y -= dy * force * 0.02;
-                }
-            }
+            if (this.x > canvas.width + this.radius) this.x = -this.radius;
+            else if (this.x < -this.radius) this.x = canvas.width + this.radius;
+            if (this.y > canvas.height + this.radius) this.y = -this.radius;
+            else if (this.y < -this.radius) this.y = canvas.height + this.radius;
         }
 
         draw() {
-            ctx.fillStyle = document.body.classList.contains('dark-theme') 
-                ? 'rgba(0, 120, 215, 0.3)' 
-                : 'rgba(0, 120, 215, 0.15)';
+            const gradient = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
+            gradient.addColorStop(0, this.color);
+            gradient.addColorStop(1, 'transparent');
+            
+            ctx.fillStyle = gradient;
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
+    let orbs = [];
     function init() {
-        particles = [];
-        const numberOfParticles = (canvas.width * canvas.height) / 15000;
-        for (let i = 0; i < numberOfParticles; i++) {
-            particles.push(new Particle());
+        orbs = [];
+        const numberOfOrbs = 6; // Fewer, larger orbs
+        for (let i = 0; i < numberOfOrbs; i++) {
+            orbs.push(new Orb());
         }
     }
 
     function animate() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-        
-        for (let i = 0; i < particles.length; i++) {
-            particles[i].update();
-            particles[i].draw();
-
-            for (let j = i; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                if (distance < 100) {
-                    const opacity = 1 - (distance / 100);
-                    ctx.strokeStyle = document.body.classList.contains('dark-theme')
-                        ? `rgba(0, 120, 215, ${opacity * 0.1})`
-                        : `rgba(0, 120, 215, ${opacity * 0.05})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
-                }
-            }
-        }
+        orbs.forEach(orb => {
+            orb.update();
+            orb.draw();
+        });
         animationId = requestAnimationFrame(animate);
     }
 

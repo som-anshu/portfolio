@@ -22,13 +22,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Outfit:wght@100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preload" href="CV/Profile7.png" as="image">
 </head>
 
 <body class="loading">
+    <div class="custom-cursor"></div>
+    <div class="grain-overlay"></div>
     <canvas id="bg-canvas"></canvas>
     <!-- Preloader -->
     <div id="preloader">
@@ -62,7 +64,8 @@
         <!-- Intro Section -->
         <section id="intro" class="section intro-section">
             <div class="container intro-container">
-                <div class="intro-text reveal-left">
+                <div class="ambient-glow" style="top: 0; left: -10%;"></div>
+                <div class="intro-content reveal-left">
                     <br>
                     <br>
                     <br>
@@ -96,338 +99,100 @@
         <!-- Skills Section -->
         <section id="skills" class="section bg-light">
             <div class="container">
+                <div class="ambient-glow" style="bottom: -10%; right: -5%;"></div>
                 <h2 class="section-title text-gradient reveal-up">Technical Competence & Skills</h2>
 
                 <div class="skills-main-layout">
-                    <!-- Technical Mastery Division -->
-                    <div class="skills-division" id="technical-mastery">
-                        <h3 class="division-title">
-                            <i class="fa-solid fa-microchip"></i> Technical Mastery
-                        </h3>
-                        <div class="skills-grid">
-                            <!-- Languages -->
-
-                            <!-- Languages -->
-                            <div class="skill-category reveal-up delay-300">
-                                <h3 class="category-title"><i class="fa-solid fa-code"></i> Languages</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/python.svg" alt="Python Logo"
-                                                    class="skill-logo"> Python</span>
-                                            <span>95%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="95%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/cpp.svg" alt="C++ Logo"
-                                                    class="skill-logo"> C++</span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/plc.png"
-                                                    alt="PLC Logo" class="skill-logo"> Ladder
-                                                Programming</span>
-                                            <span>80%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/mysql.svg" alt="SQL Logo"
-                                                    class="skill-logo"> SQL</span>
-                                            <span>75%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="75%"></div>
-                                        </div>
-                                    </div>
+                    <!-- Languages -->
+                    <div class="skill-category reveal-up">
+                        <h3 class="category-title"><i class="fa-solid fa-code"></i> Languages</h3>
+                        <div class="skill-bars">
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span class="skill-name"><img src="CV/LOGO/python.svg" alt="Python Logo"
+                                            class="skill-logo"> Python</span>
+                                    <span>95%</span>
+                                </div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="95%"></div>
                                 </div>
                             </div>
-
-                            <!-- Tools/Platforms -->
-                            <div class="skill-category reveal-up delay-400">
-                                <h3 class="category-title"><i class="fa-solid fa-screwdriver-wrench"></i> Tools &
-                                    Platforms</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/ros.svg" alt="ROS2 Logo"
-                                                    class="skill-logo"> ROS2</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/MATLAB.svg" alt="MATLAB Logo"
-                                                    class="skill-logo"> MATLAB </span>
-                                            <span>80%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/proteus.svg" alt="Proteus Logo"
-                                                    class="skill-logo"> Proteus </span>
-                                            <span>80%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="80%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">
-                                                <img src="CV/LOGO/solidworks.svg" alt="SolidWorks Logo"
-                                                    class="skill-logo">
-                                                SolidWorks
-                                            </span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">
-                                                <img src="CV/LOGO/autocad.svg" alt="AutoCAD Logo" class="skill-logo">
-                                                AutoCAD
-                                            </span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/creo-parametrics.svg"
-                                                    alt="Creo Parametric Logo" class="skill-logo"> Creo
-                                                Parametric</span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/bambu.jpeg"
-                                                    alt="Bambu Studio Logo" class="skill-logo"> Bambu
-                                                Studio</span>
-                                            <span>75%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="75%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">
-                                                <div class="skill-logos">
-                                                    <img src="CV/LOGO/numpy.svg" alt="NumPy Logo" class="skill-logo">
-                                                    <img src="CV/LOGO/Pandas.svg" alt="Pandas Logo" class="skill-logo">
-                                                    <img src="CV/LOGO/scikit-learn.svg" alt="Scikit-Learn Logo" class="skill-logo">
-                                                </div>
-                                                NumPy / Pandas / Scikit-Learn
-                                            </span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span class="skill-name"><img src="CV/LOGO/cpp.svg" alt="C++ Logo"
+                                            class="skill-logo"> C++</span>
+                                    <span>85%</span>
+                                </div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="85%"></div>
                                 </div>
                             </div>
-
-                            <!-- Hardware Platforms -->
-                            <div class="skill-category reveal-up delay-500">
-                                <h3 class="category-title"><i class="fa-solid fa-microchip"></i> Hardware Platforms</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/arduino.svg" alt="Arduino Logo"
-                                                    class="skill-logo">
-                                                Arduino
-                                                Platform</span>
-                                            <span>95%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="95%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/raspberry-pi.svg"
-                                                    alt="Raspberry Pi Logo" class="skill-logo">
-                                                Raspberry Pi</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/ubuntu.png" alt="Ubuntu Logo"
-                                                    class="skill-logo">
-                                                Ubuntu 24.04</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/espressif-systems.svg"
-                                                    alt="ESP32 Logo" class="skill-logo"> ESP32</span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name"><img src="CV/LOGO/plc.png"
-                                                    alt="PLC Logo" class="skill-logo"> PLC
-                                                (Logix
-                                                Pro / TwidoSuite)</span>
-                                            <span>80%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="80%"></div>
-                                        </div>
-                                    </div>
+                            <div class="skill-bar">
+                                <div class="skill-info">
+                                    <span class="skill-name"><img src="CV/LOGO/plc.png" alt="PLC Logo"
+                                            class="skill-logo"> Ladder Programming</span>
+                                    <span>80%</span>
+                                </div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="80%"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Core Professional Skills Division -->
-                    <div class="skills-division soft-skills" id="core-professional-skills">
-                        <h3 class="division-title">
-                            <i class="fa-solid fa-users-gear"></i> Core Professional Skills
-                        </h3>
-                        <div class="skills-grid">
-                            <!-- Leadership & Collaboration -->
-                            <div class="skill-category reveal-up">
-                                <h3 class="category-title"><i class="fa-solid fa-people-group"></i> Leadership &
-                                    Collaboration</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Team Leadership</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Project Management</span>
-                                            <span>85%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="85%"></div>
-                                        </div>
-                                    </div>
+                    <!-- Tools/Platforms -->
+                    <div class="skill-category reveal-up delay-100">
+                        <h3 class="category-title"><i class="fa-solid fa-screwdriver-wrench"></i> Tools & Platforms</h3>
+                        <div class="skill-bars">
+                            <div class="skill-bar">
+                                <div class="skill-info"><span class="skill-name"><img src="CV/LOGO/ros.svg"
+                                            alt="ROS2 Logo" class="skill-logo"> ROS2</span><span>90%</span></div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="90%"></div>
                                 </div>
                             </div>
-
-                            <!-- Problem Solving -->
-                            <div class="skill-category reveal-up delay-100">
-                                <h3 class="category-title"><i class="fa-solid fa-lightbulb"></i> Problem Solving</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Critical Thinking</span>
-                                            <span>95%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="95%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Creative Engineering</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Strategic Thinking -->
-                            <div class="skill-category reveal-up delay-200">
-                                <h3 class="category-title"><i class="fa-solid fa-compass"></i> Strategic Thinking</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Adaptability</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Technical Communication</span>
-                                            <span>95%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="95%"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Organization -->
-                            <div class="skill-category reveal-up delay-300">
-                                <h3 class="category-title"><i class="fa-solid fa-layer-group"></i> Organization</h3>
-                                <div class="skill-bars">
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Structured Workflow</span>
-                                            <span>95%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="95%"></div>
-                                        </div>
-                                    </div>
-                                    <div class="skill-bar">
-                                        <div class="skill-info">
-                                            <span class="skill-name">Task Prioritization</span>
-                                            <span>90%</span>
-                                        </div>
-                                        <div class="progress-bg">
-                                            <div class="progress-fill" data-width="90%"></div>
-                                        </div>
-                                    </div>
+                            <div class="skill-bar">
+                                <div class="skill-info"><span class="skill-name"><img src="CV/LOGO/MATLAB.svg"
+                                            alt="MATLAB Logo" class="skill-logo"> MATLAB </span><span>80%</span></div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="80%"></div>
                                 </div>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Hardware -->
+                    <div class="skill-category reveal-up delay-200">
+                        <h3 class="category-title"><i class="fa-solid fa-microchip"></i> Hardware</h3>
+                        <div class="skill-bars">
+                            <div class="skill-bar">
+                                <div class="skill-info"><span class="skill-name"><img src="CV/LOGO/arduino.svg"
+                                            alt="Arduino Logo" class="skill-logo"> Arduino</span><span>95%</span></div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-info"><span class="skill-name"><img src="CV/LOGO/raspberry-pi.svg"
+                                            alt="Raspberry Pi Logo" class="skill-logo"> Raspberry Pi</span><span>90%</span>
+                                </div>
+                                <div class="progress-bg">
+                                    <div class="progress-fill" data-width="90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Leadership -->
+                    <div class="skill-category reveal-up delay-300">
+                        <h3 class="category-title"><i class="fa-solid fa-people-group"></i> Leadership</h3>
+                        <p class="text-muted">90% Team Leadership proficiency in multidisciplinary environments.</p>
+                    </div>
+
+                    <!-- Problem Solving -->
+                    <div class="skill-category reveal-up delay-400">
+                        <h3 class="category-title"><i class="fa-solid fa-lightbulb"></i> Solving</h3>
+                        <p class="text-muted">95% Critical Thinking applied to robotic kinematics.</p>
                     </div>
                 </div>
             </div>
